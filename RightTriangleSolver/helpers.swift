@@ -130,6 +130,7 @@ func DetermineType() {
     
     if numOfAngles == 3 && numOfSides == 0 {
         print("You have 3 angles, cannot calculate this triangle!")
+        exit(0)
     }
     
     if numOfAngles == 1 && numOfSides == 2 {
@@ -221,7 +222,7 @@ func CheckTriangle () -> Bool {
     }
     
     if isTwoAngles { //have to make sure that the angles are less than 180 degrees
-        if calcAngleA * pi / 180 + calcAngleB * pi / 180 + calcAngleC * pi / 180 <= pi {
+        if calcAngleA + calcAngleB + calcAngleC  < pi {
             return true
         } else {
             return false
