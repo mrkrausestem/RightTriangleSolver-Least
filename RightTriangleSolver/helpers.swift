@@ -265,7 +265,7 @@ func CalculateTriangle() {
         if calcSideA == 0 {
             calcSideA = sqrt(calcSideC * calcSideC - calcSideB * calcSideB)
         } else if calcSideB == 0 {
-            calcSideB = sqrt(calcSideC * calcSideC - calcSideB * calcSideB)
+            calcSideB = sqrt(calcSideC * calcSideC - calcSideA * calcSideA)
         } else if calcSideC == 0 {
             calcSideC = sqrt(calcSideA * calcSideA + calcSideB * calcSideB)
         }
