@@ -174,6 +174,20 @@ func OrderSides () {
         }
     }
     
+    //we also have to check to see if angle C has been assigned a value that is not 90 and move it to the other position
+    if isTwoAngles {
+        if calcAngleC != 0 && calcAngleC != pi / 2 {
+            if calcAngleA == 0 { //put the value in angle A if A is blank
+                calcAngleA = calcAngleC
+                calcSideA  = calcSideC
+            } else if calcAngleB == 0 { //put it in angle B
+                calcAngleB = calcAngleC
+                calcSideB = calcSideC
+            }
+            calcAngleC = 0.0
+            calcSideC = 0.0
+        }
+    }
 }
 
 func CheckRight () -> Bool { // This one will check to see if we have a right triangle based on the information that
