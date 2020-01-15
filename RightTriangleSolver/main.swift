@@ -38,7 +38,7 @@ print("Welcome to the right triangle solver!")
 
 print("Please enter three measurements from your triangle.")
 
-GetMeasurements()
+GetMeasurements()  //Example of how to call a function, check the helpers.swift file for more useful functions.
 
 //Determine what type of measurements that you have been given. ie two sides and 1 angle, 3 sides, 2 angles and 1 side
 //Note that 3 angles is a failure case, you cannot determine the dimensions of a triangle with 3 angles

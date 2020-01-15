@@ -172,10 +172,8 @@ func OrderSides () {
             calcAngleB = temp
             calcSideB = temp2
         }
-    }
-    
-    //we also have to check to see if angle C has been assigned a value that is not 90 and move it to the other position
-    if isTwoAngles {
+        
+        //we also have to check to see if angle C has been assigned a value that is not 90 and move it to the other position
         if calcAngleC != 0 && calcAngleC != pi / 2 {
             if calcAngleA == 0 { //put the value in angle A if A is blank
                 calcAngleA = calcAngleC
@@ -204,7 +202,7 @@ func CheckRight () -> Bool { // This one will check to see if we have a right tr
         
         if calcAngleC == 90.0 * pi / 180 { //if I have angle C as 90, I have a right triangle
             return true
-        } else if calcAngleA + calcAngleB == pi / 2 { //if I don't have angle C
+        } else if Int((calcAngleA + calcAngleB)*1000)/1000 == Int((pi / 2)*1000)/1000 { //if I don't have angle C, have to round for more "difficult cases"
             return true
         }
     }
@@ -236,7 +234,7 @@ func CheckTriangle () -> Bool {
     }
     
     if isTwoAngles { //have to make sure that the angles are less than 180 degrees
-        if calcAngleA + calcAngleB + calcAngleC  < pi {
+        if calcAngleA  + calcAngleB + calcAngleC * pi / 180 < pi {
             return true
         } else {
             return false
@@ -246,51 +244,8 @@ func CheckTriangle () -> Bool {
     return true
 }
 
-func CalculateTriangle() {
-    if isThreeSides{ //Need to figure out the other two angles
-        //Calculate Angle A
-        calcAngleA = asin(calcSideA/calcSideC)
-        //Calculate Angle B
-        calcAngleB = asin(calcSideB/calcSideC)
-        calcAngleC = pi / 2
-    }else if isTwoAngles { //Need to figure out missing angle and other two sides!
-        // First calculate missing angle
-        if calcAngleA == 0 {
-            calcAngleA = pi - calcAngleB - calcAngleC
-        }else if calcAngleB == 0 {
-            calcAngleB = pi - calcAngleA - calcAngleC
-        }else if calcAngleC == 0 {
-            calcAngleC = pi - calcAngleA - calcAngleB
-        }
-        //now calculate the remaining sides
-        if calcSideA != 0 {
-            calcSideC = calcSideA/sin(calcAngleA)
-            calcSideB = calcSideA*tan(calcAngleB)
-        } else if calcSideB != 0 {
-            calcSideA = calcSideB*tan(calcAngleA)
-            calcSideC = calcSideB/cos(calcAngleA)
-        } else if calcSideC != 0 {
-            calcSideA = calcSideC*sin(calcAngleA)
-            calcSideB = calcSideC*sin(calcAngleB)
-        }
-    } else if isOneAngle { //Need to figure out other side, then the angles.  Remember we've already
-                           // confirmed this is a right triangle and angle C is 90 degrees
-        // Use pythagorean theroem to find missing side.
-        if calcSideA == 0 {
-            calcSideA = sqrt(calcSideC * calcSideC - calcSideB * calcSideB)
-        } else if calcSideB == 0 {
-            calcSideB = sqrt(calcSideC * calcSideC - calcSideA * calcSideA)
-        } else if calcSideC == 0 {
-            calcSideC = sqrt(calcSideA * calcSideA + calcSideB * calcSideB)
-        }
-        
-        //now need to find angle a and b
-        //Calculate Angle A
-        calcAngleA = asin(calcSideA/calcSideC)
-        //Calculate Angle B
-        calcAngleB = asin(calcSideB/calcSideC)
-        
-    }
-}
+
+
+
 
 
