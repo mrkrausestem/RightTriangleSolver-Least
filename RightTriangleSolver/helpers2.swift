@@ -219,6 +219,36 @@ func CheckRight () -> Bool { // This one will check to see if we have a right tr
                 return true
             }
         }
+        
+        var testValue1: Double = 0.0
+        var testValue2: Double = 0.0
+        //this will determine if we have right triangle for non 90 degree angles
+        if calcAngleA != 0 { // figure out which angle I have
+            if calcSideC != 0 && calcSideA != 0 { // figure out which two sides
+                testValue1 = sin(calcAngleA)
+                testValue2 = calcSideA/calcSideC
+            } else if calcSideC != 0 && calcSideB != 0 {
+                testValue1 = cos(calcAngleA)
+                testValue2 = calcSideB/calcSideC
+            } else if calcSideB != 0 && calcSideA != 0 {
+                testValue1 = tan(calcAngleA)
+                testValue2 = calcSideA/calcSideB
+            }
+        } else if calcAngleB != 0 {
+            if calcSideC != 0 && calcSideA != 0 {
+                testValue1 = cos(calcAngleB)
+                testValue2 = calcSideA/calcSideC
+            } else if calcSideC != 0 && calcSideB != 0 {
+                testValue1 = sin(calcAngleB)
+                testValue2 = calcSideB/calcSideC
+            } else if calcSideB != 0 && calcSideA != 0 {
+                testValue1 = tan(calcAngleB)
+                testValue2 = calcSideB/calcSideA
+            }
+        }
+        if abs(testValue1 - testValue2) < 0.01 { //build in tolerance for rounding error
+            return true
+        }
     }
     
     return false
