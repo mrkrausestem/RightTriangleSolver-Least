@@ -175,15 +175,37 @@ func OrderSides () {
         
         //we also have to check to see if angle C has been assigned a value that is not 90 and move it to the other position
         if calcAngleC != 0 && calcAngleC != pi / 2 {
-            if calcAngleA == 0 { //put the value in angle A if A is blank
-                calcAngleA = calcAngleC
-                calcSideA  = calcSideC
-            } else if calcAngleB == 0 { //put it in angle B
-                calcAngleB = calcAngleC
-                calcSideB = calcSideC
+            if calcSideA != 0 && calcSideB != 0 { // have both side a and b need to swap with the bigger one
+                if calcSideA > calcSideB { //side a is biggest swap A and C it has to be hypotenuse if its a right triangle
+                    let temp : Double = calcAngleC
+                    let temp2 : Double = calcSideC
+                    calcAngleC = calcAngleA
+                    calcSideC = calcSideA
+                    calcAngleA = temp
+                    calcSideA = temp2
+                } else { // side b is the biggest swap B and C
+                    let temp : Double = calcAngleC
+                    let temp2 : Double = calcSideC
+                    calcAngleC = calcAngleB
+                    calcSideC = calcSideB
+                    calcAngleB = temp
+                    calcSideB = temp2
+                }
+            } else if calcSideA == 0 { //a is empty, use that
+                let temp : Double = calcAngleC
+                let temp2 : Double = calcSideC
+                calcAngleC = calcAngleA
+                calcSideC = calcSideA
+                calcAngleA = temp
+                calcSideA = temp2
+            } else if calcSideB == 0 { //b is empty, use that
+                let temp : Double = calcAngleC
+                let temp2 : Double = calcSideC
+                calcAngleC = calcAngleB
+                calcSideC = calcSideB
+                calcAngleB = temp
+                calcSideB = temp2
             }
-            calcAngleC = 0.0
-            calcSideC = 0.0
         }
     }
 }
