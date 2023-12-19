@@ -191,14 +191,16 @@ func OrderSides () {
                     calcAngleB = temp
                     calcSideB = temp2
                 }
-            } else if calcSideA == 0 { //a is empty, use that
+            } else if calcSideA == 0 { //a is empty, use that, assume that b is not hypotenuse
+                print("There is some ambiguity in your data, assuming you have NOT given the hypotenuse")
                 let temp : Double = calcAngleC
                 let temp2 : Double = calcSideC
                 calcAngleC = calcAngleA
                 calcSideC = calcSideA
                 calcAngleA = temp
                 calcSideA = temp2
-            } else if calcSideB == 0 { //b is empty, use that
+            } else if calcSideB == 0 { //b is empty, use that, assume that b is not hypotenuse
+                print("There is some ambiguity in your data, assuming you have NOT given the hypotenuse")
                 let temp : Double = calcAngleC
                 let temp2 : Double = calcSideC
                 calcAngleC = calcAngleB
@@ -215,7 +217,7 @@ func CheckRight () -> Bool { // This one will check to see if we have a right tr
                                 // We can make the assumption that angle C and side C has been set up as the 90 and the hypo
     
     if isThreeSides { //need pythagorean theorem
-        if calcSideA * calcSideA + calcSideB * calcSideB == calcSideC * calcSideC {
+        if abs((calcSideA * calcSideA + calcSideB * calcSideB) - (calcSideC * calcSideC)) < tolerance {
             return true
         }
     }
@@ -224,7 +226,7 @@ func CheckRight () -> Bool { // This one will check to see if we have a right tr
         
         if calcAngleC == 90.0 * pi / 180 { //if I have angle C as 90, I have a right triangle
             return true
-        } else if Int((calcAngleA + calcAngleB)*1000)/1000 == Int((pi / 2)*1000)/1000 { //if I don't have angle C, have to round for more "difficult cases"
+        } else if abs((calcAngleA + calcAngleB) - (pi / 2)) < tolerance { //if I don't have angle C, have to round for more "difficult cases"
             return true
         }
     }
@@ -268,7 +270,7 @@ func CheckRight () -> Bool { // This one will check to see if we have a right tr
                 testValue2 = calcSideB/calcSideA
             }
         }
-        if abs(testValue1 - testValue2) < 0.01 { //build in tolerance for rounding error
+        if abs(testValue1 - testValue2) < tolerance { //build in tolerance for rounding error
             return true
         }
     }
