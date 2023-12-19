@@ -32,7 +32,8 @@ var isTriangle : Bool = false
 
 //Setup a constant for pi
 let pi = 3.14159
-
+//Setup a tolerance
+let tolerance = 0.05
 print("Welcome to the right triangle solver!")
 
 
